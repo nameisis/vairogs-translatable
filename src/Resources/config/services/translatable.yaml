@@ -1,0 +1,29 @@
+services:
+    vairogs.utils.translatable.event.listener:
+        class: '%vairogs.utils.translatable.event.listener.class%'
+        public: true
+        arguments:
+            - '%vairogs.utils.translatable.table%'
+        tags:
+            -
+                name: doctrine.event_listener
+                event: loadClassMetadata
+
+    vairogs.utils.translatable.form.type.translator:
+        class: Vairogs\Utils\Translatable\Form\Type\TranslatorType
+        arguments:
+            - '%vairogs.utils.translatable.locales%'
+            - '@vairogs.utils.translatable.manager'
+            - '@translator'
+            - "@service_container"
+            - "@annotation_reader"
+        tags:
+            -
+                name: form.type
+                alias: translations
+
+    vairogs.utils.translatable.manager:
+        class: Vairogs\Utils\Translatable\Helper\Manager
+        public: true
+        arguments:
+            - "@doctrine"

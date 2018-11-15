@@ -1,0 +1,43 @@
+{% block translations_widget %}
+    {% spaceless %}
+
+        {% set currentFieldName = form.currentFieldName.vars.value %}
+
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                {% for locale in locales %}
+                    {% set TabHref = '#tab_translate_' ~ locale ~ '_' ~ currentFieldName %}
+
+                    {% if locale == app.request.locale or (loop.index0 == 0 and app.request.locale not in locales) %}
+                        {% set ActiveTab = 'active' %}
+                    {% else %}
+                        {% set ActiveTab = '' %}
+                    {% endif %}
+
+                    <li class="{{ ActiveTab }}">
+                        <a aria-expanded="true" href="{{ TabHref }}" data-toggle="tab" data-lang="{{ locale }}" class="tabber">
+                            {{ translatedtablocales[locale] }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <div class="tab-content">
+                {% for locale in locales %}
+                    {% set TabId = 'tab_translate_' ~ locale ~ '_' ~ currentFieldName %}
+
+                    {% if locale == app.request.locale or (loop.index0 == 0 and app.request.locale not in locales) %}
+                        {% set ActiveContent = 'active' %}
+                    {% else %}
+                        {% set ActiveContent = '' %}
+                    {% endif %}
+
+                    <div class="tab-pane {{ ActiveContent }}" id="{{ TabId }}">
+                        {{ form_row(attribute(form, locale)) }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    {% endspaceless %}
+{% endblock %}

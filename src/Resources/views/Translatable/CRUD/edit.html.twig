@@ -1,0 +1,105 @@
+{% extends 'Translatable/CRUD/base_edit.html.twig' %}
+
+{% block form %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            {% if admin.slugged is defined %}
+            $('.titled').keyup(function() {
+                if (!$('.saveslug').is(':checked')) {
+
+                    var id = parseInt($(this).attr('data-id')),
+                        locale = $(this).attr('data-locale'),
+                        className = $(this).attr('data-class'),
+                        title = $(this).val();
+
+                    var slug = $.slugify(title, {separator: '_'});
+                    $('.slugged[data-locale="' + locale + '"]').val(slug);
+                }
+            });
+            {% endif %}
+            {% if admin.slugged is defined %}
+            $(".btn-success").click(function(e) {
+                $th = $(this);
+                if (e.which) {
+                    e.preventDefault();
+                    var ok = 0;
+                    if (!$(".slugged").length) {
+                        ok = 2;
+                    }
+                    {% if admin.slugged is defined %}
+                    var keys = [];
+                    $(".classed li").each(function() {
+                        if ($(this).find("div.checked").length) {
+                            keys.push($(this).find("div.checked input").val());
+                        }
+                    });
+                    $(".slugged").each(function() {
+                        $.ajax({
+                            async: false,
+                            {% if admin.ok is defined and admin.ok %}
+                            url: "{{ admin.generateUrl('slugValidate') }}",
+                            {% else %}
+                            url: "{{ admin.generateUrl('list') }}",
+                            {% endif %}
+                            data: {
+                                'slug': $(this).val(),
+                                'locale': $(this).attr('data-locale'),
+                                'class': $(this).attr('data-class'),
+                                'id': $(this).attr('data-id'),
+                                'keys': keys
+                            },
+                            method: 'GET',
+                            success: function(json) {
+                                if (json.success === 1) {
+                                    ok += 1;
+                                }
+                            }
+                        });
+                    });
+                    {% endif %}
+                    if (ok === 2) {
+                        $th.click();
+                        return true;
+                    } else {
+                        alert('{{ 'bad_slug'|trans({}, 'admin') }}');
+                        return false;
+                    }
+                }
+                {% if admin.textaread is defined %}
+                {% if admin.counter is defined %}
+                var oe = 1;
+                {% else %}
+                var oe = 0;
+                {% endif %}
+                $(".ck_item").each(function() {
+                    var name = $(this).attr('name');
+                    var instName = 'CKEDITOR.instances.' + name;
+                    instName = instName.split('[').join('_');
+                    instName = instName.slice(0, -1);
+                    instName = instName.split(']').join('_');
+                    instName = instName.split('__').join('_');
+                    inst = eval(instName);
+                    var data = inst.getData();
+                    if (data.length > 0) {
+                        oe += 1;
+                    }
+                });
+                if (oe == 2) {
+                    return true;
+                }
+                alert('{{ 'empty_editor'|trans({}, 'admin') }}');
+                return false;
+                {% endif %}
+            });
+            {% endif %}
+            {% if admin.tabbed is defined %}
+            $('.tabber').click(function(e) {
+                if (e.which) {
+                    $(".nav-tabs li").not('.active').find('.tabber[data-lang="' + $(this).attr('data-lang') + '"]').click();
+                }
+            });
+            {% endif %}
+        });
+    </script>
+    {{ parent() }}
+{% endblock %}

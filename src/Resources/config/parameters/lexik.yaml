@@ -1,0 +1,5 @@
+parameters:
+    vairogs.utils.lexik.translation.crud.controller.class: Vairogs\Utils\Translatable\Controller\TranslationCRUDController
+    vairogs.utils.lexik.translation.admin.orm.class: Vairogs\Utils\Translatable\Admin\ORMTranslationAdmin
+    vairogs.utils.lexik.translation.admin.orm.entity: Lexik\Bundle\TranslationBundle\Entity\TransUnit
+    vairogs.utils.lexik.translation.admin.orm.template: 'Lexik/CRUD/list.html.twig'

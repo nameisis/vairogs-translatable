@@ -1,0 +1,3 @@
+parameters:
+    jms_i18n_routing.locale_resolver.class: Vairogs\Utils\Translatable\Router\DefaultLocaleResolver
+    vairogs.utils.translatable.event.listener.class: Vairogs\Utils\Translatable\Event\Listener\TranslationMappingListener
