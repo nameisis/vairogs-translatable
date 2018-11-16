@@ -2,15 +2,15 @@
 
 namespace Vairogs\Utils\Translatable\DependencyInjection\Compiler;
 
-use Vairogs\Utils\DependencyInjection\Component\Definable;
-use Vairogs\Utils\VairogsBundle;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use Vairogs\Utils\DependencyInjection\Component\Definable;
+use Vairogs\Utils\VairogsBundle;
 
 class TranslatablePass implements CompilerPassInterface
 {
-    public const NAME = \KODE.'.'.Definable::TRANSLATABLE;
+    public const NAME = VairogsBundle::FULL_ALIAS.'.'.Definable::TRANSLATABLE;
 
     /**
      * {@inheritdoc}
