@@ -30,6 +30,7 @@
         "doctrine/orm": "^2.6",
         "twig/twig": "^2",
         "lexik/translation-bundle": "^4.0",
+        "phpsed/translation-bundle": "dev-master",
         "jms/i18n-routing-bundle": "*",
         "symfony/form": "*",
         "psr/container": "^1.0",
