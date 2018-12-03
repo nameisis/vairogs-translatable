@@ -29,10 +29,6 @@ class TranslatablePrepend implements Prepandable
 
     public function setConfig(ContainerBuilder $container, string $override, array $config): void
     {
-        if ($override === self::OVERRIDE[1] && null === $config['auto_cache_clean_interval']) {
-            $config['auto_cache_clean_interval'] = 0;
-        }
-
         $container->prependExtensionConfig($override, $config);
     }
 }
