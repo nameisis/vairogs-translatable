@@ -3,9 +3,9 @@
 namespace Vairogs\Utils\Translatable\Helper;
 
 use Doctrine\ORM\EntityManager;
-use Vairogs\Utils\Translatable\Entity\BaseEntity;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Form\FormInterface;
+use Vairogs\Utils\Translatable\Entity\BaseEntity;
 
 class Manager
 {

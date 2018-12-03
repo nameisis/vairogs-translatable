@@ -3,8 +3,6 @@
 namespace Vairogs\Utils\Translatable\Form\Type;
 
 use Doctrine\Common\Annotations\Reader;
-use Vairogs\Utils\Translatable\Annotation\TranslatableField;
-use Vairogs\Utils\Translatable\Helper\Manager;
 use Locale;
 use ReflectionException;
 use ReflectionProperty;
@@ -20,6 +18,8 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Translation\TranslatorInterface;
+use Vairogs\Utils\Translatable\Annotation\TranslatableField;
+use Vairogs\Utils\Translatable\Helper\Manager;
 
 class TranslatorType extends AbstractType
 {

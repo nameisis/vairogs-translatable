@@ -2,16 +2,15 @@
 
 namespace Vairogs\Utils\Translatable\DependencyInjection;
 
-use Vairogs\Utils\DependencyInjection\Component\Definable;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use Vairogs\Utils\DependencyInjection\Component\Definable;
 
 class Definition implements Definable
 {
     private const ALLOWED = [
         Definable::TRANSLATABLE,
-        Definable::LEXIK,
     ];
 
     public function getExtensionDefinition($extension): ArrayNodeDefinition
@@ -23,15 +22,12 @@ class Definition implements Definable
         switch ($extension) {
             case Definable::TRANSLATABLE:
                 return $this->getTranslatableDefinition($extension);
-            case Definable::LEXIK:
-                return $this->getLexikDefinition($extension);
         }
     }
 
     private function getTranslatableDefinition($extension): ArrayNodeDefinition
     {
-        $treeBuilder = new TreeBuilder();
-        $node = $treeBuilder->root($extension);
+        $node = (new TreeBuilder())->root($extension);
         /** @var ArrayNodeDefinition $node */
 
         // @formatter:off
@@ -61,24 +57,6 @@ class Definition implements Definable
                 ->scalarNode('template')
                     ->defaultValue('Translatable/translations.html.twig')
                 ->end()
-            ->end();
-        // @formatter:on
-
-        return $node;
-    }
-
-    private function getLexikDefinition($extension): ArrayNodeDefinition
-    {
-        $treeBuilder = new TreeBuilder();
-        $node = $treeBuilder->root($extension);
-        /** @var ArrayNodeDefinition $node */
-
-        // @formatter:off
-        $node
-            ->canBeEnabled()
-            ->addDefaultsIfNotSet()
-            ->children()
-
             ->end();
         // @formatter:on
 

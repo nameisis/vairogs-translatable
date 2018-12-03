@@ -29,7 +29,6 @@
         "sonata-project/doctrine-orm-admin-bundle": "^3",
         "doctrine/orm": "^2.6",
         "twig/twig": "^2",
-        "lexik/translation-bundle": "^4.0",
         "jms/i18n-routing-bundle": "*",
         "symfony/form": "*",
         "psr/container": "^1.0",
