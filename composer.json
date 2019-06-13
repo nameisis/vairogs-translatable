@@ -1,6 +1,6 @@
 {
     "name": "vairogs/vairogs-translatable",
-    "description": "Real Latvian CMS Utils: Translatable library",
+    "description": "Utils: Translatable library",
     "license": "MIT",
     "type": "library",
     "keywords": [
